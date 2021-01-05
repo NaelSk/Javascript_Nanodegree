@@ -97,7 +97,11 @@ function display() {
     const human = {
         name: document.getElementById('name').value,
         diet: document.getElementById('diet').value,
-        weight: parseInt(document.getElementById('weight').value),
+        weight: {
+            amoutn: parseInt(document.getElementById('weight').value),
+            unit: document.getElementById('weightUnit').value  
+
+        } ,
         height: {
             amount: parseInt(document.getElementById('hightAmount').value),
             unit: document.getElementById('hightUnit').value
