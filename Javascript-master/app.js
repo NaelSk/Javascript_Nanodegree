@@ -79,15 +79,10 @@ const dino = {
     }
 ]
 }
-const button = document.getElementById('btn');
-button.addEventListener('click', display);
-function display() {
-    console.log("You start listing to the button");
-}
 
 // Create Dino Constructor
 function DinoConstructor(obj) {
-        this.species = obj.species,
+    this.species = obj.species,
         this.weight = obj.weight,
         this.height = obj.height,
         this.diet = obj.diet,
@@ -95,16 +90,30 @@ function DinoConstructor(obj) {
         this.when = obj.when,
         this.fact = obj.fact
 }
+
+const button = document.getElementById('btn');
+button.addEventListener('click', display);
+function display() {
+    const human = {
+        name: document.getElementById('name').value,
+        diet: document.getElementById('diet').value,
+        weight: parseInt(document.getElementById('weight').value),
+        height: parseInt(document.getElementById('feet').value)
+    }
+    console.log(human);
+}
+
+
     // Create Dino Objects
 
 
     // Create Human Object
-const human={
-    name   : document.getElementById('name').value,
-    diet   : document.getElementById('diet').value,
-    weight : parseInt(document.getElementById('weight').value),
-    height: parseInt(document.getElementById('height').value),
-}
+    const human={
+        name   : document.getElementById('name').value,
+        diet   : document.getElementById('diet').value,
+        weight : parseInt(document.getElementById('weight').value),
+        height: parseInt(document.getElementById('height').value)
+    }
     // Use IIFE to get human data from form
 
 
