@@ -1,5 +1,10 @@
 // Fetch data from local file & Create Dino Objects
-const dino = {"Dinos": [
+//const url = 'https://github.com/NaelSk/Javascript_Nanodegree/blob/main/Javascript-master/dino.json'
+//const dino2 = readTextFile(url);
+
+
+const dino = {
+    "Dinos": [
     {
         "species": "Triceratops",
         "weight": 13000,
@@ -74,6 +79,9 @@ const dino = {"Dinos": [
     }
 ]
 }
+
+
+
 // Create Dino Constructor
 function DinoConstructor(obj) {
         this.species = obj.species,
@@ -88,7 +96,12 @@ function DinoConstructor(obj) {
 
 
     // Create Human Object
-
+const human={
+    name   : document.getElementById('name').value,
+    diet   : document.getElementById('diet').value,
+    weight : parseInt(document.getElementById('weight').value),
+    height : parseInt(document.getElementById('height').value)
+}
     // Use IIFE to get human data from form
 
 
