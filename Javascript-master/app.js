@@ -79,8 +79,11 @@ const dino = {
     }
 ]
 }
-
-
+const button = document.getElementById('btn');
+button.addEventListener('click', display);
+function display() {
+    console.log("You start listing to the button");
+}
 
 // Create Dino Constructor
 function DinoConstructor(obj) {
