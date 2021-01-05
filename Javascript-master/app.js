@@ -100,7 +100,7 @@ const human={
     name   : document.getElementById('name').value,
     diet   : document.getElementById('diet').value,
     weight : parseInt(document.getElementById('weight').value),
-    height : parseInt(document.getElementById('height').value)
+    height: parseInt(document.getElementById('height').value),
 }
     // Use IIFE to get human data from form
 
