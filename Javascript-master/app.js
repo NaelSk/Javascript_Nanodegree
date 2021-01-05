@@ -98,7 +98,10 @@ function display() {
         name: document.getElementById('name').value,
         diet: document.getElementById('diet').value,
         weight: parseInt(document.getElementById('weight').value),
-        height: parseInt(document.getElementById('feet').value)
+        height: {
+            amount: parseInt(document.getElementById('hightAmount').value),
+            unit: document.getElementById('hightUnit').value
+        }
     }
     console.log(human);
 }

@@ -26,10 +26,30 @@
             <p>Name:</p>
             <input id="name" class="form-field__full" type="name" name="name">
             <p>Height</p>
-            <label>Feet: <input id="feet" class="form-field__short" type="number" name="feet"></label>
-            <label>inches: <input id="inches" class="form-field__short" type="number" name="inches"></label>
+
+            <label><input id="hightAmount" class="form-field__full" type="number" name="feet"></label>
+            <!-- <label>inches: <input id="inches" class="form-field__short" type="number" name="inches"></label> -->
+            <p>
+                <label>
+                    Hight Unit :
+                    <select id="hightUnit" class="form-field__short" name="inches">
+                        <option>feet</option>
+                        <option>inch</option>
+                        <option>meter</option>
+                    </select>
+                </label>
+            </p>
             <p>Weight:</p>
-            <label><input id="weight" class="form-field__full" type="number" name="weight">lbs</label>
+            <label><input id="weight" class="form-field__full" type="number" name="weight"></label>
+            <p>
+                <label>
+                    Weight Unit :
+                    <select id="weightUnit" class="form-field__short" name="inches">
+                        <option>kg</option>
+                        <option>lb</option>
+                    </select>
+                </label>
+            </p>
             <p>Diet:</p>
             <select id="diet" class="form-field__full" name="diet">
                 <option>Herbavor</option>
@@ -40,10 +60,10 @@
         </div>
     </form>
     <!-- .grid to attach tiles to -->
-    <main id="grid"></main>
-    <footer>
-        <!-- Include information source -->
-        <p class="fine-print">Data Sourced from <a href="https://www.wikipedia.org/">Wikipedia.org</a>, all numbers are approximations.</p>
-    </footer>
-    </body>
+            <main id="grid"></main>
+            <footer>
+                <!-- Include information source -->
+                <p class="fine-print">Data Sourced from <a href="https://www.wikipedia.org/">Wikipedia.org</a>, all numbers are approximations.</p>
+            </footer>
+</body>
 </html>
