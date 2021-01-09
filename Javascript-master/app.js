@@ -80,22 +80,6 @@ const dino = {
 ]
 }
 
-// Create Dino Constructor
-function DinoConstructor(obj) {
-    this.species = obj.species,
-    this.weight = obj.weight,
-    this.height = obj.height,
-    this.diet = obj.diet,
-    this.where = obj.where,
-    this.when = obj.when,
-    this.fact = obj.fact
-    this.ListOfFacts = [this.fact,
-        "Had lived in ".concat(obj.where, " in ", obj.when, " era."),
-    ]
-    
-    
-}
-
 const button = document.getElementById('btn');
 button.addEventListener('click', display);
 function display() {
@@ -120,32 +104,27 @@ function display() {
     console.log(newDinosWithFactList);
 
 }
+// Create Dino Constructor
+function DinoConstructor(obj) {
+    this.species = obj.species,
+        this.weight = obj.weight,
+        this.height = obj.height,
+        this.diet = obj.diet,
+        this.where = obj.where,
+        this.when = obj.when,
+        this.fact = obj.fact
+    this.ListOfFacts = [this.fact,
+    "Had lived in ".concat(obj.where, " in ", obj.when, " era."),
+    ]
 
-/*const testhuman = {
-    name: "Nael",
-    diet: "herbavor",
-    weight: {
-        amount:90,
-        unit: "kg"
-    },
-    height: {
-        amount: 170,
-        unit: "meter"
-    }
+
 }
-*/
-
-    // Create Dino Objects
-
-//const Triceratops = dino.Dinos[0]
-//var TriceratopsDino = new DinoConstructor(Triceratops)
-    
-    
+ 
     // Use IIFE to get human data from form
 
 
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+// Create Dino Compare Method 1
+// NOTE: Weight in JSON file is in lbs, height in inches.
 function comaperHeight(dinoObj, humanObj) {
     let humanInfo = humanObj.height;
     
@@ -167,11 +146,10 @@ function comaperHeight(dinoObj, humanObj) {
     
 }
     
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+// Create Dino Compare Method 2
+// NOTE: Weight in JSON file is in lbs, height in inches.
 function compareWeight(dinoObj, humanObj) {
     let humanInfo = humanObj.weight;
-
 
     if (humanInfo.unit == "kg") {
         //convert to lb
@@ -187,8 +165,8 @@ function compareWeight(dinoObj, humanObj) {
 
 }
     
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+// Create Dino Compare Method 3
+// NOTE: Weight in JSON file is in lbs, height in inches.
 function compareDiet(dinoObj, humanObj) {
     
     if (dinoObj.diet == humanObj.diet) {
