@@ -106,15 +106,15 @@ function display() {
 }
 // Create Dino Constructor
 function DinoConstructor(obj) {
-    this.species = obj.species,
-        this.weight = obj.weight,
-        this.height = obj.height,
-        this.diet = obj.diet,
-        this.where = obj.where,
-        this.when = obj.when,
-        this.fact = obj.fact
+    this.species = obj.species;
+    this.weight = obj.weight;
+    this.height = obj.height;
+    this.diet = obj.diet;
+    this.where = obj.where;
+    this.when = obj.when;
+    this.fact = obj.fact;
     this.ListOfFacts = [this.fact,
-    "Had lived in ".concat(obj.where, " in ", obj.when, " era."),
+        "Had lived in ".concat(obj.where, " in ", obj.when, " era.")
     ]
 
 
@@ -177,9 +177,37 @@ function compareDiet(dinoObj, humanObj) {
     (dinoObj.ListOfFacts).push(newfact);
     return dinoObj
 }
+// Generate Tiles for each Dino in Array
+var Tile = function (x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = 50;
+};
 
+/*Tile.prototype.draw = function () {
+    fill(214, 247, 202);
+    strokeWeight(2);
+    rect(this.x, this.y, this.size, this.size, 10);
+    image(getImage("./images/human"), this.x, this.y, this.size, this.size);
+};*/
 
-    // Generate Tiles for each Dino in Array
+     // / Create the array of tiles at appropriate positions
+var tiles = [];
+var NUM_COLS = 3;
+var NUM_ROWS = 3;
+for (var i = 0; i < NUM_COLS; i++) {
+    for (var j = 0; j < NUM_ROWS; j++) {
+        var tileX = i * 54 + 50;
+        var tileY = j * 54 + 50;
+        tiles.push(new Tile(tileX, tileY));
+    }
+}
+
+     /// Start by drawing them all face down
+for (var i = 0; i < tiles.length; i++) {
+    tiles[i].draw();
+}
+
   
         // Add tiles to DOM
 
