@@ -112,6 +112,15 @@ function display() {
         this.y = y;
         this.size = 50;
         this.picPath = "./image/".concat(dinoObj.name);
+        
+    };
+
+    Tile.prototype.draw = function () {
+        fill(214, 247, 202);
+        strokeWeight(2);
+        rect(this.x, this.y, this.size, this.size, 10);
+        image(getImage(this.picPath),
+            this.x, this.y, this.size, this.size);
     };
 
     //Create the array of tiles at appropriate positions
@@ -147,7 +156,7 @@ function display() {
 
     //Start by drawing them all face down
     for (var i = 0; i < tiles.length; i++) {
-        console.log(tiles[i].picPath);
+        tiles[i].draw();
     }
     console.log(tiles);// remove later
 
