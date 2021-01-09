@@ -83,13 +83,17 @@ const dino = {
 // Create Dino Constructor
 function DinoConstructor(obj) {
     this.species = obj.species,
-        this.weight = obj.weight,
-        this.height = obj.height,
-        this.diet = obj.diet,
-        this.where = obj.where,
-        this.when = obj.when,
-        this.fact = obj.fact
-        this.ListOfFacts=[]
+    this.weight = obj.weight,
+    this.height = obj.height,
+    this.diet = obj.diet,
+    this.where = obj.where,
+    this.when = obj.when,
+    this.fact = obj.fact
+    this.ListOfFacts = [this.fact,
+        "Had lived in ".concat(obj.where, " in ", obj.when, " era."),
+    ]
+    
+    
 }
 
 const button = document.getElementById('btn');
@@ -109,13 +113,17 @@ function display() {
             unit: document.getElementById('hightUnit').value
         }
     }
-    return human
+    var newDinosWithFactList = (dino.Dinos).map(dinoObj => new DinoConstructor(dinoObj));
+    newDinosWithFactList = newDinosWithFactList.map(dinoObj => comaperHeight(dinoObj, human));
+    newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareWeight(dinoObj, human));
+    newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareDiet(dinoObj, human));
+    console.log(newDinosWithFactList);
 
 }
 
-const testhuman = {
+/*const testhuman = {
     name: "Nael",
-    diet: "Flafel",
+    diet: "herbavor",
     weight: {
         amount:90,
         unit: "kg"
@@ -125,14 +133,12 @@ const testhuman = {
         unit: "meter"
     }
 }
-
-
-
+*/
 
     // Create Dino Objects
 
-const Triceratops = dino.Dinos[0]
-var TriceratopsDino = new DinoConstructor(Triceratops)
+//const Triceratops = dino.Dinos[0]
+//var TriceratopsDino = new DinoConstructor(Triceratops)
     
     
     // Use IIFE to get human data from form
@@ -174,7 +180,7 @@ function compareWeight(dinoObj, humanObj) {
     
     let weightRatio = dinoObj.weight/ humanInfo.amount ;
     console.log(weightRatio);
-    let newfact = "The weight of ".concat(dinoObj.species, " equal ", Math.round(weightRatio), " from ", humanObj.name, "'s weight");
+    let newfact = "The weight of ".concat(dinoObj.species, " equal ", Math.round(weightRatio), " of ", humanObj.name, "'s weight");
 
     (dinoObj.ListOfFacts).push(newfact);
     return dinoObj
@@ -183,6 +189,16 @@ function compareWeight(dinoObj, humanObj) {
     
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
+function compareDiet(dinoObj, humanObj) {
+    
+    if (dinoObj.diet == humanObj.diet) {
+        newfact = (humanObj.name).concat(" and ", dinoObj.species , " have the same diet");
+    } else {
+        newfact = (humanObj.name).concat(" and ", dinoObj.species , " have the different diet");
+    }
+    (dinoObj.ListOfFacts).push(newfact);
+    return dinoObj
+}
 
 
     // Generate Tiles for each Dino in Array
