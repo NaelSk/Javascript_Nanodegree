@@ -79,7 +79,7 @@ const dino = {
     }
 ]
 }
-
+const form = document.getElementById('dino-compare');
 const button = document.getElementById('btn');
 button.addEventListener('click', display);
 function display() {
@@ -154,17 +154,19 @@ function display() {
     (function fillGrid() {
         tilesHTML += '<div>';
         tiles.forEach(function (element) {
+            //tilesHTML += '<svg width="100" height="100">';
             let path = element.picPath;
-            let imgHtmlElemet = "<img src="+path +'">';
+            let imgHtmlElemet = "<img src="+path +'>';
             console.log(imgHtmlElemet);
-            tilesHTML += '<img src =' + path + ">";
+            tilesHTML += imgHtmlElemet;
+            //tilesHTML += '</svg>';
         });    
         tilesHTML += '</div>';
         grid.innerHTML = tilesHTML;
         console.log(grid);
     })();
-    
 
+    removeFrom();
 }
 // Create Dino Constructor
 function DinoConstructor(obj) {
@@ -245,9 +247,11 @@ function compareDiet(dinoObj, humanObj) {
 
 
   
-        // Add tiles to DOM
+// Add tiles to DOM
 
-    // Remove form from screen
-
+// Remove form from screen
+function removeFrom() {
+    form.style.display = 'none';
+}
 
 // On button click, prepare and display infographic
