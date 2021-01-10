@@ -173,14 +173,7 @@ select {
     font-size: 0.7em;
 }
 
-.box {
-  background: black;
-  border: 1px solid #555;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #AAA;
-}
+
 
 #btn2 {
     display: inline-block;
