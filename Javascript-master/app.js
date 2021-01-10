@@ -255,3 +255,11 @@ function removeFrom() {
 }
 
 // On button click, prepare and display infographic
+
+
+
+//Get random elements from the list
+function getRandomItem(ls) {
+    let item = ls[Math.floor(Math.random() * items.length)];
+    return item
+}
