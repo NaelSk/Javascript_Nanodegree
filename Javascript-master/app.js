@@ -114,7 +114,7 @@ function display() {
         this.x = x;
         this.y = y;
         this.size = 50;
-        this.picPath = ".\\images\\"+dinoObj.name+".png";
+        this.picPath = ".\\images\\" + (dinoObj.name).replace(" ", "%20")+".png";
 
     };
 
