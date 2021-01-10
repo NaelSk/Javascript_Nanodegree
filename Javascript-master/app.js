@@ -111,7 +111,7 @@ function display() {
         this.x = x;
         this.y = y;
         this.size = 50;
-        this.picPath = "./image/".concat(dinoObj.name);
+        this.picPath = "./image/".concat(dinoObj.name,".png");
         
     };
 
