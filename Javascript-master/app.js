@@ -151,13 +151,12 @@ function display() {
     )();
 
 
-    var tilesHTML = '';
+    let tilesHTML = '';
     (function fillGrid() {
-        tilesHTML += '<div>';
         tiles.forEach(function (element) {
-            console.log(element);
+            tilesHTML += '<div>';//console.log(element);
             let path = element.picPath;
-            var selectedFact = "";
+            let selectedFact = "";
             let imgHtmlElemet = "<img src=" + path + '>';
             switch ((element.dino).name) {
                 case 'Pigeon':
@@ -174,10 +173,13 @@ function display() {
             let fact="<h4>"+selectedFact+"</h4>";
             tilesHTML += imgHtmlElemet;
             tilesHTML += fact;
+            tilesHTML += '</div>';
         });    
-        tilesHTML += '</div>';
+       
+        tilesHTML += '<div id="btn2">'+"Compare Me"+ '</div >';
         grid.innerHTML = tilesHTML;
-        //console.log(grid);  //remove later
+        console.log(grid.innerHTML)
+        
     })();
 
     removeFrom();
