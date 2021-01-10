@@ -87,7 +87,8 @@ function display() {
 
     // Create Human Object
     var human = {
-        name: document.getElementById('name').value,
+        name: "human",
+        real_name: document.getElementById('name').value,
         diet: document.getElementById('diet').value,
         weight: {
             amount: parseInt(document.getElementById('weight').value),
@@ -113,7 +114,7 @@ function display() {
         this.x = x;
         this.y = y;
         this.size = 50;
-        this.picPath = '.\\images\\'+dinoObj.name+".png";
+        this.picPath = ".\\images\\"+dinoObj.name+".png";
 
     };
 
@@ -154,7 +155,7 @@ function display() {
         tilesHTML += '<div>';
         tiles.forEach(function (element) {
             let path = element.picPath;
-            let imgHtmlElemet = '<img src="'+path +'">';
+            let imgHtmlElemet = "<img src="+path +'">';
             console.log(imgHtmlElemet);
             tilesHTML += '<img src =' + path + ">";
         });    
