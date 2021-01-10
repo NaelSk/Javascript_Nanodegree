@@ -89,6 +89,7 @@ function display() {
     var human = {
         name: "human",
         real_name: document.getElementById('name').value,
+        ListOfFacts: [this.real_name],
         diet: document.getElementById('diet').value,
         weight: {
             amount: parseInt(document.getElementById('weight').value),
@@ -99,6 +100,7 @@ function display() {
             amount: parseInt(document.getElementById('hightAmount').value),
             unit: document.getElementById('hightUnit').value
         }
+        
     }
     var newDinosWithFactList = (dino.Dinos).map(dinoObj => new DinoConstructor(dinoObj));
     console.log(newDinosWithFactList);
@@ -128,7 +130,6 @@ function display() {
         let m = 0;
         for (var i = 0; i < NUM_COLS; ++i) {
 
-
             for (var j = 0; j < NUM_ROWS; ++j) {
 
                 if (k == newDinosWithFactList.length / 2) {
@@ -154,16 +155,29 @@ function display() {
     (function fillGrid() {
         tilesHTML += '<div>';
         tiles.forEach(function (element) {
-            //tilesHTML += '<svg width="100" height="100">';
+            console.log(element);
             let path = element.picPath;
-            let imgHtmlElemet = "<img src="+path +'>';
-            console.log(imgHtmlElemet);
+            var selectedFact = "";
+            let imgHtmlElemet = "<img src=" + path + '>';
+            switch ((element.dino).name) {
+                case 'Pigeon':
+                    selectedFact = element.dino.fact;
+                    break;
+                case 'human':
+                    selectedFact = element.dino.real_name;
+                    break;
+                default:
+                    selectedFact = getRandomItem(element.dino.ListOfFacts);
+            }
+            
+               
+            let fact="<h4>"+selectedFact+"</h4>";
             tilesHTML += imgHtmlElemet;
-            //tilesHTML += '</svg>';
+            tilesHTML += fact;
         });    
         tilesHTML += '</div>';
         grid.innerHTML = tilesHTML;
-        console.log(grid);
+        //console.log(grid);  //remove later
     })();
 
     removeFrom();
@@ -260,6 +274,6 @@ function removeFrom() {
 
 //Get random elements from the list
 function getRandomItem(ls) {
-    let item = ls[Math.floor(Math.random() * items.length)];
+    let item = ls[Math.floor(Math.random() * ls.length)];
     return item
 }
