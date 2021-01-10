@@ -83,15 +83,17 @@ const dino = {
 const button = document.getElementById('btn');
 button.addEventListener('click', display);
 function display() {
+
+
     // Create Human Object
-    var  human = {
+    var human = {
         name: document.getElementById('name').value,
         diet: document.getElementById('diet').value,
         weight: {
             amount: parseInt(document.getElementById('weight').value),
-            unit: document.getElementById('weightUnit').value  
+            unit: document.getElementById('weightUnit').value
 
-        } ,
+        },
         height: {
             amount: parseInt(document.getElementById('hightAmount').value),
             unit: document.getElementById('hightUnit').value
@@ -102,8 +104,8 @@ function display() {
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => comaperHeight(dinoObj, human));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareWeight(dinoObj, human));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareDiet(dinoObj, human));
-    
-  
+
+
 
     // Generate Tiles for each Dino in Array
     function Tile(x, y, dinoObj) {
@@ -111,41 +113,34 @@ function display() {
         this.x = x;
         this.y = y;
         this.size = 50;
-        this.picPath = "./image/".concat(dinoObj.name,".png");
-        
+        this.picPath = '.\\images\\'+dinoObj.name+".png";
+
     };
 
-    Tile.prototype.draw = function () {
-        fill(214, 247, 202);
-        strokeWeight(2);
-        rect(this.x, this.y, this.size, this.size, 10);
-        image(getImage(this.picPath),
-            this.x, this.y, this.size, this.size);
-    };
-
+    
     //Create the array of tiles at appropriate positions
-    var tiles=(function tilePostios() {
+    var tiles = (function tilePostios() {
         var tiles = [];
         var NUM_COLS = 3;
         var NUM_ROWS = 3;
         let k = 0;
         let m = 0;
         for (var i = 0; i < NUM_COLS; ++i) {
-            
-           
+
+
             for (var j = 0; j < NUM_ROWS; ++j) {
-                
+
                 if (k == newDinosWithFactList.length / 2) {
-                    
+
                     tiles.push(new Tile(tileX, tileY, human));
                 }
                 if (k < newDinosWithFactList.length) {
-                   
-                   dinoObj=newDinosWithFactList[k]
-                   var tileX = i * 54 + 50;
-                   var tileY = j * 54 + 50;
-                   tiles.push(new Tile(tileX, tileY, dinoObj));
-                   k = ++k;
+
+                    dinoObj = newDinosWithFactList[k]
+                    var tileX = i * 54 + 50;
+                    var tileY = j * 54 + 50;
+                    tiles.push(new Tile(tileX, tileY, dinoObj));
+                    k = ++k;
                 }
             }
         }
@@ -154,11 +149,20 @@ function display() {
     )();
 
 
-    //Start by drawing them all face down
-    for (var i = 0; i < tiles.length; i++) {
-        tiles[i].draw();
-    }
-    console.log(tiles);// remove later
+    var tilesHTML = '';
+    (function fillGrid() {
+        tilesHTML += '<div>';
+        tiles.forEach(function (element) {
+            let path = element.picPath;
+            let imgHtmlElemet = '<img src="'+path +'">';
+            console.log(imgHtmlElemet);
+            tilesHTML += '<img src =' + path + ">";
+        });    
+        tilesHTML += '</div>';
+        grid.innerHTML = tilesHTML;
+        console.log(grid);
+    })();
+    
 
 }
 // Create Dino Constructor
