@@ -79,8 +79,20 @@ const dino = {
     }
 ]
 }
+
+
 const form = document.getElementById('dino-compare');
 const button = document.getElementById('btn');
+const name = document.getElementById('name')
+name.addEventListener('keyup', function (event) {
+    isNotValidname = (name=="");
+
+    if (isNotValidname) {
+        button.disabled = true;
+    } else {
+        button.disabled = false;
+    }
+});
 button.addEventListener('click', display);
 function display() {
 
@@ -178,7 +190,9 @@ function display() {
        
         tilesHTML += '<div id="btn2">'+"Compare Me"+ '</div >';
         grid.innerHTML = tilesHTML;
-        console.log(grid.innerHTML)
+        
+        const newbutton = document.getElementById('btn2');
+        newbutton.addEventListener('click', display);
         
     })();
 
