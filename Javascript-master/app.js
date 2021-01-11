@@ -104,8 +104,8 @@
         const human = checkUnitAndConvert(new Human());
 
         let newDinosWithFactList = (dino.Dinos).map(dinoObj => new Dino(dinoObj));
-        newDinosWithFactList = newDinosWithFactList.map(dinoObj => comaperHeight(dinoObj, human));
-        newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareWeight(dinoObj, human));
+        newDinosWithFactList = newDinosWithFactList.map(dinoObj => dinoObj.comaperHeight(human));
+        newDinosWithFactList = newDinosWithFactList.map(dinoObj => dinoObj.compareWeight(human));
         newDinosWithFactList = newDinosWithFactList.map(dinoObj => dinoObj.compareDiet(human));
 
         //Generate Tiles for each Dino in Array
@@ -194,13 +194,13 @@
         
     }
 
- // Create Dino Compare Method 3
- // NOTE: Weight in JSON file is in lbs, height in inches.
-/**
-* @description compare between dinosaurs's  to human's diet
-* @param {Human} humanObj
-* @returns {Dino} the dion Object itself after adding new fact based on comparing human's and Dino's diet
-*/
+    // Create Dino Compare Method 3
+    // NOTE: Weight in JSON file is in lbs, height in inches.
+    /**
+    * @description compare between dinosaurs's  to human's diet
+    * @param {Human} humanObj
+    * @returns {Dino} the Dion Object itself after adding new fact based on comparing human's and Dino's diet
+    */
     Dino.prototype.compareDiet = function (humanObj) {
 
         if (this.diet == humanObj.diet) {
@@ -211,28 +211,40 @@
         (this.ListOfFacts).push(newfact);
         return this;
     };
-    const human_exampple = {
-        "name": "Triceratops",
-        "weight": 13000,
-        "height": 114,
-        "diet": "herbavor",
-        "where": "North America",
-        "when": "Late Cretaceous",
-        "fact": "First discovered in 1889 by Othniel Charles Marsh"
-    };
-    let dion_example = {
-        "species": "Triceratops",
-        "weight": 13000,
-        "height": 114,
-        "diet": "herbavor",
-        "where": "North America",
-        "when": "Late Cretaceous",
-        "fact": "First discovered in 1889 by Othniel Charles Marsh"
+    // Create Dino Compare Method 2
+    // NOTE: Weight in JSON file is in lbs, height in inches.
+    /**
+    * @description compare between dinosaurs's to human's weight
+    * @param {Human} humanObj
+    * @returns {Dino} the Dion Object itself after adding new fact based on comparing human's and Dino's weight
+    */
+    Dino.prototype.compareWeight = function (humanObj) {
+
+        const weightRatio = this.weight / (humanObj.weight.amount);
+        const newfact = "The weight of ".concat(this.name, " equal ", weightRatio.toFixed(2), " of ", humanObj.real_name, "'s weight");
+
+        (this.ListOfFacts).push(newfact);
+
+        return this
+
     };
 
-    let dinoObje = new Dino(dion_example);
-    //console.log(dinoObje.compareDiet("FONG WO"));
-    console.log(dinoObje.compareDiet(human_exampple));
+    // Create Dino Compare Method 1
+    // NOTE: Weight in JSON file is in lbs, height in inches.
+    /**
+    * @description compare between dinosaurs's to human's height 
+    * @param {Human} humanObj
+    * @returns {Dino}the Dion Object itself after adding new fact based on comparing human's and Dino's height
+    */
+    Dino.prototype.comaperHeight=function (humanObj) {
+
+        const heightRatio = this.height / (humanObj.height.amount);
+        const newfact = "The height of ".concat(this.name, " equal ", heightRatio.toFixed(2), " of ", humanObj.real_name, "'s height");
+
+        (this.ListOfFacts).push(newfact);
+
+        return this
+    };
 
     // Create Human Object
     /**
@@ -270,43 +282,8 @@
 
     // Use IIFE to get human data from form
 
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    /**
-    * @description compare between dinosaurs's to human's height 
-    * @param {Dino} dinoObj
-    * @param {Human} humanObj
-    * @returns {Dino} dinoObj after adding new fact based on comparing human's and Dino's height
-    */
-    function comaperHeight(dinoObj, humanObj) {
-
-        const heightRatio = dinoObj.height / (humanObj.height.amount);
-        const newfact = "The height of ".concat(dinoObj.name, " equal ", heightRatio.toFixed(2), " of ", humanObj.real_name, "'s height");
-
-        (dinoObj.ListOfFacts).push(newfact);
-
-        return dinoObj
-    }
-
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    /**
-    * @description compare between dinosaurs's to human's weight
-    * @param {Dino} dinoObj
-    * @param {Human} humanObj
-    * @returns {Dino} dinoObj after adding new fact based on comparing human's and Dino's weight
-    */
-    function compareWeight(dinoObj, humanObj) {
-
-        const weightRatio = dinoObj.weight / (humanObj.weight.amount);
-        const newfact = "The weight of ".concat(dinoObj.name, " equal ", weightRatio.toFixed(2), " of ", humanObj.real_name, "'s weight");
-
-        (dinoObj.ListOfFacts).push(newfact);
-
-        return dinoObj
-
-    }
     
+
     //convert to inch
     /**
     * @description it will convert the value from meter to equivalent in Inch
