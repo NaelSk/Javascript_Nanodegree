@@ -140,7 +140,7 @@
         (function fillGrid() {
             tiles.forEach(function (element) {
                 tilesHTML += '<div class="grid-item">';//console.log(element);
-                let path = element.picPath;
+                const path = element.picPath;
                 let selectedFact = "";
                 let imgHtmlElemet = "<img src=" + path + '>';
                 switch ((element.dino).name) {
