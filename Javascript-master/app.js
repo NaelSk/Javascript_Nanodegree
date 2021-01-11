@@ -101,7 +101,7 @@
 
     function display() {
 
-        let human = checkUnitAndConvert(new Human());
+        const human = checkUnitAndConvert(new Human());
 
         let newDinosWithFactList = (dino.Dinos).map(dinoObj => new Dino(dinoObj));
         newDinosWithFactList = newDinosWithFactList.map(dinoObj => comaperHeight(dinoObj, human));
@@ -110,10 +110,10 @@
 
         //Generate Tiles for each Dino in Array
 
-        let tiles = (function tilePostios() {
+        const tiles = (function tilePostios() {
             let tiles = [];
-            let NUM_COLS = 3;
-            let NUM_ROWS = 3;
+            const NUM_COLS = 3;
+            const NUM_ROWS = 3;
             let k = 0;
             for (let i = 0; i < NUM_COLS; ++i) {
                 for (let j = 0; j < NUM_ROWS; ++j) {
@@ -198,7 +198,7 @@
     * @description Represent the inserted data of human.
     * @constructor
     */
-    function Human() {
+    function Human(){
         this.name = "human",
             this.real_name = document.getElementById('name').value,
             this.ListOfFacts = [this.real_name],
@@ -212,7 +212,6 @@
                 amount: parseInt(document.getElementById('hightAmount').value),
                 unit: document.getElementById('hightUnit').value
             }
-
     }
 
 
@@ -240,8 +239,8 @@
     */
     function comaperHeight(dinoObj, humanObj) {
 
-        let heightRatio = dinoObj.height / (humanObj.height.amount);
-        let newfact = "The height of ".concat(dinoObj.name, " equal ", heightRatio.toFixed(2), " of ", humanObj.real_name, "'s height");
+        const heightRatio = dinoObj.height / (humanObj.height.amount);
+        const newfact = "The height of ".concat(dinoObj.name, " equal ", heightRatio.toFixed(2), " of ", humanObj.real_name, "'s height");
 
         (dinoObj.ListOfFacts).push(newfact);
 
@@ -258,8 +257,8 @@
     */
     function compareWeight(dinoObj, humanObj) {
 
-        let weightRatio = dinoObj.weight / (humanObj.weight.amount);
-        let newfact = "The weight of ".concat(dinoObj.name, " equal ", weightRatio.toFixed(2), " of ", humanObj.real_name, "'s weight");
+        const weightRatio = dinoObj.weight / (humanObj.weight.amount);
+        const newfact = "The weight of ".concat(dinoObj.name, " equal ", weightRatio.toFixed(2), " of ", humanObj.real_name, "'s weight");
 
         (dinoObj.ListOfFacts).push(newfact);
 
@@ -295,7 +294,7 @@
     * @returns {Human} obj after converting the its height value
     */
     function fromMeterToInch(obj) {
-        let newValue = obj.height.amount * 39.36;
+        const newValue = obj.height.amount * 39.36;
         obj.height.amount = newValue;
         return (obj);
 
@@ -307,7 +306,7 @@
     * @returns {Human} obj after converting the its height value
     */
     function fromFeetToInch(obj) {
-        let newValue = obj.height.amount * 12;
+        const newValue = obj.height.amount * 12;
         obj.height.amount = newValue;
         return (obj);
     }
@@ -319,7 +318,7 @@
     * @returns {Human} obj after converting the its weight value
     */
     function fromKgTolb(obj) {
-        let newValue = obj.weight.amount * 12;
+        const newValue = obj.weight.amount * 12;
         obj.weight.amount = newValue;
         return obj;
 
@@ -366,7 +365,7 @@
     * @returns {string} one the item in the list
     */
     function getRandomItem(ls) {
-        let item = ls[Math.floor(Math.random() * ls.length)];
+        const item = ls[Math.floor(Math.random() * ls.length)];
         return item
     }
 })();
