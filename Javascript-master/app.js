@@ -223,7 +223,7 @@
     function Tile(dinoObj) {
         this.dino = dinoObj;
         this.size = 50;
-        this.picPath = ".\\images\\" + (dinoObj.name).replace(" ", "%20") + ".png";
+        this.picPath = ".\\images\\" + (dinoObj.name).replace(" ", "%20").toLowerCase() + ".png";
 
     };
 
