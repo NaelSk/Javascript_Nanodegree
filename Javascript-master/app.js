@@ -2,7 +2,6 @@
 //const url = 'https://github.com/NaelSk/Javascript_Nanodegree/blob/main/Javascript-master/dino.json'
 //const dino2 = readTextFile(url);
 
-
 const dino = {
     "Dinos": [
     {
@@ -80,7 +79,6 @@ const dino = {
 ]
 }
 
-
 const form = document.getElementById('dino-compare');
 const button = document.getElementById('btn');
 const name = document.getElementById('name')
@@ -100,32 +98,20 @@ function display() {
 
     let human = checkUnitAndConvert(new Human());
     
-    var newDinosWithFactList = (dino.Dinos).map(dinoObj => new DinoConstructor(dinoObj));
+    let newDinosWithFactList = (dino.Dinos).map(dinoObj => new Dino(dinoObj));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => comaperHeight(dinoObj, human));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareWeight(dinoObj, human));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareDiet(dinoObj, human));
 
-
-
-    // Generate Tiles for each Dino in Array
-    function Tile(dinoObj) {
-        this.dino = dinoObj;
-        this.size = 50;
-        this.picPath = ".\\images\\" + (dinoObj.name).replace(" ", "%20")+".png";
-
-    };
-
-    
-    //Create the array of tiles at appropriate positions
-    var tiles = (function tilePostios() {
-        var tiles = [];
-        var NUM_COLS = 3;
-        var NUM_ROWS = 3;
+     //Generate Tiles for each Dino in Array
+   
+    let tiles = (function tilePostios() {
+        let tiles = [];
+        let NUM_COLS = 3;
+        let NUM_ROWS = 3;
         let k = 0;
-        for (var i = 0; i < NUM_COLS; ++i) {
-
-            for (var j = 0; j < NUM_ROWS; ++j) {
-
+        for (let i = 0; i < NUM_COLS; ++i) {
+            for (let j = 0; j < NUM_ROWS; ++j) {
                 if (k == newDinosWithFactList.length / 2) {
                     tiles.push(new Tile(human));
                 }
@@ -143,6 +129,9 @@ function display() {
 
     // Add tiles to DOM
     let tilesHTML = '';
+    /**
+    * @description Add tiles to DOM.
+    */
     (function fillGrid() {
         tiles.forEach(function (element) {
             tilesHTML += '<div class="grid-item">';//console.log(element);
@@ -178,8 +167,15 @@ function display() {
 
     removeFrom();
 }
+
+
 // Create Dino Constructor
-function DinoConstructor(obj) {
+/**
+* @description Create Dino object.
+* @constructor
+* @param {Object} obj - The author of the book
+*/
+function Dino(obj) {
     this.name = obj.species;
     this.weight = obj.weight;
     this.height = obj.height;
@@ -193,6 +189,10 @@ function DinoConstructor(obj) {
 }
 
 // Create Human Object
+/**
+* @description Represent the inserted data of human.
+* @constructor
+*/
 function  Human(){
     this.name= "human",
     this.real_name= document.getElementById('name').value,
@@ -209,12 +209,30 @@ function  Human(){
     }
 
 }
- 
-    // Use IIFE to get human data from form
 
+
+/**
+* @description Create Dino object.
+* @constructor
+* @param {Object} obj - The author of the book
+*/
+function Tile(dinoObj) {
+    this.dino = dinoObj;
+    this.size = 50;
+    this.picPath = ".\\images\\" + (dinoObj.name).replace(" ", "%20") + ".png";
+
+};
+ 
+// Use IIFE to get human data from form
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
+/**
+* @description compare between dinosaurs's to human's height 
+* @param {Dino} dinoObj
+* @param {Human} humanObj
+* @returns {Dino} dinoObj after adding new fact based on comparing human's and Dino's height
+*/
 function comaperHeight(dinoObj, humanObj) {
 
     let heightRatio = dinoObj.height / (humanObj.height.amount);
@@ -227,6 +245,12 @@ function comaperHeight(dinoObj, humanObj) {
     
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
+/**
+* @description compare between dinosaurs's to human's weight
+* @param {Dino} dinoObj
+* @param {Human} humanObj
+* @returns {Dino} dinoObj after adding new fact based on comparing human's and Dino's weight
+*/
 function compareWeight(dinoObj, humanObj) {
 
     let weightRatio = dinoObj.weight / (humanObj.weight.amount);
@@ -240,6 +264,14 @@ function compareWeight(dinoObj, humanObj) {
     
 // Create Dino Compare Method 3
 // NOTE: Weight in JSON file is in lbs, height in inches.
+// Create Dino Compare Method 2
+// NOTE: Weight in JSON file is in lbs, height in inches.
+/**
+* @description compare between dinosaurs's  to human's diet
+* @param {Dino} dinoObj
+* @param {Human} humanObj
+* @returns {Dino} dinoObj after adding new fact based on comparing human's and Dino's diet
+*/
 function compareDiet(dinoObj, humanObj) {
     
     if (dinoObj.diet == humanObj.diet) {
@@ -252,6 +284,11 @@ function compareDiet(dinoObj, humanObj) {
 }
 
 //convert to inch
+/**
+* @description it will convert the value from meter to equivalent in Inch
+* @param {Human} obj
+* @returns {Human} obj after converting the its height value
+*/
 function fromMeterToInch(obj) {
     let newValue = obj.height.amount * 39.36;
     obj.height.amount = newValue;
@@ -259,6 +296,11 @@ function fromMeterToInch(obj) {
 
 }
 //convert to inch
+/**
+* @description it will convert the value from feet to equivalent in Inch
+* @param {Human} obj
+* @returns {Human} obj after converting the its height value
+*/
 function fromFeetToInch(obj) {
     let newValue = obj.height.amount * 12;
     obj.height.amount = newValue;
@@ -266,6 +308,11 @@ function fromFeetToInch(obj) {
 }
 
 //convert to lb
+/**
+* @description it will convert the value from kg to equivalent in lb
+* @param {Human} obj
+* @returns {Human} obj after converting the its weight value
+*/
 function fromKgTolb(obj) {
     let newValue = obj.weight.amount * 12;
     obj.weight.amount = newValue;
@@ -274,6 +321,11 @@ function fromKgTolb(obj) {
 }
 
 //reform the human
+/**
+* @description it will convert the values of human's data to be able compared with exist data of dinosaurs where the unit in inch and lb
+* @param {Human} obj
+* @returns {Human} obj after converting  its values
+*/
 function checkUnitAndConvert(humanObj) {
     let convertedObj;
     switch ((humanObj.height).unit) {
@@ -285,7 +337,6 @@ function checkUnitAndConvert(humanObj) {
             break;
         default:
             convertedObj = humanObj;
-
     }
     switch ((convertedObj.weight).unit) {
         case "kg":
@@ -294,17 +345,21 @@ function checkUnitAndConvert(humanObj) {
     }
     return convertedObj;
 }
-
   
-
-
 // Remove form from screen
+/**
+* @description will remove form from screen
+*/
 function removeFrom() {
     form.style.display = 'none';
 }
 
-
 //Get random elements from the list
+/**
+* @description it will convert the values of human's data to be able compared with exist data of dinosaurs where the unit in inch and lb
+* @param {ListOfFacts} ls
+* @returns {string} one the item in the list
+*/
 function getRandomItem(ls) {
     let item = ls[Math.floor(Math.random() * ls.length)];
     return item
