@@ -91,31 +91,16 @@ name.addEventListener('keyup', function (event) {
         button.disabled = true;
     } else {
         button.disabled = false;
+        // On button click, prepare and display infographic
+        button.addEventListener('click', display);
     }
 });
-button.addEventListener('click', display);
+
 function display() {
 
-
-    // Create Human Object
-    var human = {
-        name: "human",
-        real_name: document.getElementById('name').value,
-        ListOfFacts: [this.real_name],
-        diet: document.getElementById('diet').value,
-        weight: {
-            amount: parseInt(document.getElementById('weight').value),
-            unit: document.getElementById('weightUnit').value
-
-        },
-        height: {
-            amount: parseInt(document.getElementById('hightAmount').value),
-            unit: document.getElementById('hightUnit').value
-        }
-        
-    }
+    let human = checkUnitAndConvert(new Human());
+    
     var newDinosWithFactList = (dino.Dinos).map(dinoObj => new DinoConstructor(dinoObj));
-    console.log(newDinosWithFactList);
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => comaperHeight(dinoObj, human));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareWeight(dinoObj, human));
     newDinosWithFactList = newDinosWithFactList.map(dinoObj => compareDiet(dinoObj, human));
@@ -192,6 +177,7 @@ function display() {
         grid.innerHTML = tilesHTML;
         
         const newbutton = document.getElementById('btn2');
+        // On button click, show new fact
         newbutton.addEventListener('click', display);
         
     })();
@@ -208,9 +194,25 @@ function DinoConstructor(obj) {
     this.when = obj.when;
     this.fact = obj.fact;
     this.ListOfFacts = [this.fact,
-        (this.name).concat(" Had lived in ",obj.where, " in ", obj.when, " era.")
+        (this.name).concat(" has lived in ",obj.where, " at ", obj.when, " era.")
     ]
+}
 
+// Create Human Object
+function  Human(){
+    this.name= "human",
+    this.real_name= document.getElementById('name').value,
+    this.ListOfFacts= [this.real_name],
+    this.diet=document.getElementById('diet').value,
+    this.weight= {
+        amount: parseInt(document.getElementById('weight').value),
+        unit: document.getElementById('weightUnit').value
+
+    },
+    this.height= {
+        amount: parseInt(document.getElementById('hightAmount').value),
+        unit: document.getElementById('hightUnit').value
+    }
 
 }
  
@@ -220,41 +222,24 @@ function DinoConstructor(obj) {
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 function comaperHeight(dinoObj, humanObj) {
-    let humanInfo = humanObj.height;
-    
-    
-    if (humanInfo.unit == "meter") {
-        //convert to inch
-        humanInfo.amount = (humanInfo.amount) * 39.36;
-    }
-    if (humanInfo.unit == "feet") {
-        //convert to inch
-        humanInfo.amount = (humanInfo.amount) * 12;
-    }
-    
-    let heightRatio = humanInfo.amount / dinoObj.height;
-    let newfact = "The size of ".concat(dinoObj.name, " equal ", Math.round(heightRatio), " from ", humanObj.name, "'s size"); 
-    
+
+    let heightRatio = dinoObj.height / (humanObj.height.amount);
+    let newfact = "The height of ".concat(dinoObj.name, " equal ", heightRatio.toFixed(2), " of ", humanObj.real_name, "'s height"); 
+
     (dinoObj.ListOfFacts).push(newfact);
+
     return dinoObj
-    
 }
     
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
 function compareWeight(dinoObj, humanObj) {
-    let humanInfo = humanObj.weight;
 
-    if (humanInfo.unit == "kg") {
-        //convert to lb
-        humanInfo.amount = (humanInfo.amount) * 2.205;
-    }
-    
-    let weightRatio = dinoObj.weight/ humanInfo.amount ;
-    //console.log(weightRatio);
-    let newfact = "The weight of ".concat(dinoObj.name, " equal ", Math.round(weightRatio), " of ", humanObj.name, "'s weight");
+    let weightRatio = dinoObj.weight / (humanObj.weight.amount);
+    let newfact = "The weight of ".concat(dinoObj.name, " equal ", weightRatio.toFixed(2), " of ", humanObj.real_name, "'s weight");
 
     (dinoObj.ListOfFacts).push(newfact);
+
     return dinoObj
 
 }
@@ -272,9 +257,49 @@ function compareDiet(dinoObj, humanObj) {
     return dinoObj
 }
 
+//convert to inch
+function fromMeterToInch(obj) {
+    let newValue = obj.height.amount * 39.36;
+    obj.height.amount = newValue;
+    return (obj);
 
-     
+}
+//convert to inch
+function fromFeetToInch(obj) {
+    let newValue = obj.height.amount * 12;
+    obj.height.amount = newValue;
+    return (obj);
+}
 
+//convert to lb
+function fromKgTolb(obj) {
+    let newValue = obj.weight.amount * 12;
+    obj.weight.amount = newValue;
+    return obj;
+
+}
+
+//reform the human
+function checkUnitAndConvert(humanObj) {
+    let convertedObj;
+    switch ((humanObj.height).unit) {
+        case "meter":
+            convertedObj = fromMeterToInch(humanObj);
+            break;
+        case "feet":
+            convertedObj = fromFeetToInch(humanObj);
+            break;
+        default:
+            convertedObj = humanObj;
+
+    }
+    switch ((convertedObj.weight).unit) {
+        case "kg":
+            convertedObj = fromKgTolb(convertedObj);
+            break;
+    }
+    return convertedObj;
+}
 
   
 // Add tiles to DOM
@@ -283,9 +308,6 @@ function compareDiet(dinoObj, humanObj) {
 function removeFrom() {
     form.style.display = 'none';
 }
-
-// On button click, prepare and display infographic
-
 
 
 //Get random elements from the list
