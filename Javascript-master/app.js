@@ -108,10 +108,8 @@ function display() {
 
 
     // Generate Tiles for each Dino in Array
-    function Tile(x, y, dinoObj) {
+    function Tile(dinoObj) {
         this.dino = dinoObj;
-        this.x = x;
-        this.y = y;
         this.size = 50;
         this.picPath = ".\\images\\" + (dinoObj.name).replace(" ", "%20")+".png";
 
@@ -124,21 +122,17 @@ function display() {
         var NUM_COLS = 3;
         var NUM_ROWS = 3;
         let k = 0;
-        let m = 0;
         for (var i = 0; i < NUM_COLS; ++i) {
 
             for (var j = 0; j < NUM_ROWS; ++j) {
 
                 if (k == newDinosWithFactList.length / 2) {
-
-                    tiles.push(new Tile(tileX, tileY, human));
+                    tiles.push(new Tile(human));
                 }
                 if (k < newDinosWithFactList.length) {
 
                     dinoObj = newDinosWithFactList[k]
-                    var tileX = i * 54 + 50;
-                    var tileY = j * 54 + 50;
-                    tiles.push(new Tile(tileX, tileY, dinoObj));
+                    tiles.push(new Tile(dinoObj));
                     k = ++k;
                 }
             }
@@ -147,7 +141,7 @@ function display() {
     }
     )();
 
-
+    // Add tiles to DOM
     let tilesHTML = '';
     (function fillGrid() {
         tiles.forEach(function (element) {
@@ -302,7 +296,7 @@ function checkUnitAndConvert(humanObj) {
 }
 
   
-// Add tiles to DOM
+
 
 // Remove form from screen
 function removeFrom() {
